@@ -1,0 +1,21 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "crons": [
+    {
+      "path": "/api/platform/subscriptions/enforce",
+      "schedule": "17 * * * *"
+    },
+    {
+      "path": "/api/cron/retention",
+      "schedule": "31 3 * * *"
+    },
+    {
+      "path": "/api/cron/render-jobs",
+      "schedule": "* * * * *"
+    },
+    {
+      "path": "/api/cron/lead-notifications",
+      "schedule": "* * * * *"
+    }
+  ]
+}
