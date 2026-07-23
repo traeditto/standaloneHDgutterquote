@@ -1,0 +1,23 @@
+import type { Metadata } from "next"
+import { LegalPage } from "@/components/legal/legal-page"
+
+export const metadata: Metadata = {
+  title: "Terms of Service | HD Instant Gutter Quote",
+  description: "Terms governing contractor use of HD Instant Gutter Quote.",
+}
+
+export default function TermsPage() {
+  return <LegalPage eyebrow="CONTRACTOR AGREEMENT" title="Terms of Service" intro="These Terms govern contractor accounts, private demos, paid quote websites, widgets, lead delivery, and related services provided by HD Precision.">
+    <section><h2>1. Eligibility and authority</h2><p>You must be at least 18 years old and authorized to bind the gutter business named in the account. Account information must be accurate, and credentials may not be shared outside authorized personnel.</p></section>
+    <section><h2>2. Private demo</h2><p>The free workspace is for evaluating your own contractor website. Use only addresses and property images you are authorized to test. Demo content is private, does not create production leads, and cannot be published until the account is approved and payment is active.</p></section>
+    <section><h2>3. Fees and renewal</h2><p>The Managed Launch plan includes a $299 one-time setup charge and a subscription of $149 per month for the first three months, then $199 per month until canceled. Optional rendering packs are billed separately. Taxes may be added where required. You authorize recurring charges through Stripe and may manage or cancel the subscription through the billing portal.</p></section>
+    <section><h2>4. Contractor responsibilities</h2><p>You control your products, prices, service areas, branding, contact information, privacy notice, and follow-up practices. You are responsible for contractor licensing, permits, taxes, advertising claims, consent requirements, do-not-contact obligations, and compliance with laws applicable to your business and service area.</p></section>
+    <section><h2>5. Estimates and homeowner communications</h2><p>Online results are planning estimates, not final proposals or guarantees. You must inspect the property and verify dimensions, conditions, scope, code requirements, and pricing before entering a binding agreement with a homeowner. You may use lead information only to respond to the homeowner’s request and as disclosed in your published privacy notice.</p></section>
+    <section><h2>6. Acceptable use</h2><p>You may not use the service for unlawful, deceptive, abusive, infringing, discriminatory, or unsolicited activity; probe another contractor’s workspace; evade usage limits; upload malware or unauthorized personal information; or interfere with service operation. We may suspend access to protect homeowners, contractors, providers, or the platform.</p></section>
+    <section><h2>7. Availability and third-party services</h2><p>The service relies on providers including hosting, maps, imagery, artificial intelligence, payment, authentication, email, and domain registrars. We work to maintain availability but do not promise uninterrupted service or that every address, image, measurement, rendering, email, or domain will be available.</p></section>
+    <section><h2>8. Data and content</h2><p>You retain rights to your business content and grant HD Precision permission to host, process, transform, and deliver it solely to operate and improve the service. You represent that you have the necessary rights to all uploaded logos, photos, pricing, product information, and website content.</p></section>
+    <section><h2>9. Suspension and termination</h2><p>Past-due accounts may receive a limited grace period and may then be suspended. You may cancel recurring billing through the billing portal. Provisions concerning fees already incurred, data handling, intellectual property, disclaimers, and liability survive termination.</p></section>
+    <section><h2>10. Disclaimers and liability</h2><p>To the extent permitted by law, the service is provided “as is” and “as available.” HD Precision is not responsible for contractor workmanship, homeowner decisions, lost opportunities, inaccurate third-party data, or indirect or consequential damages. Aggregate liability arising from the service will not exceed the fees you paid for the service during the three months before the event giving rise to the claim.</p></section>
+    <section><h2>11. Governing law and changes</h2><p>Florida law governs these Terms, without regard to conflict-of-law principles. Material changes will be posted with a revised effective date; continued use after notice constitutes acceptance where permitted by law.</p></section>
+  </LegalPage>
+}

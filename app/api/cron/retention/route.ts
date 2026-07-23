@@ -10,6 +10,6 @@ export async function GET(request: NextRequest) {
   const result = await runRetentionCleanup()
   await deletePrivateImages(result.jobs.flatMap((job) => [job.source_blob_url, job.result_blob_url]))
   const renderJobsDeleted = await deleteExpiredRenderJobs(result.jobs.map((job) => job.id))
-  await recordAuditEvent({ actorType: "system", action: "retention.cleanup", metadata: { abandonedDeleted: result.abandoned, completedDeleted: result.completed, sessionsExpired: result.expiredSessions, renderJobsDeleted } })
-  return NextResponse.json({ ok: true, abandonedDeleted: result.abandoned, completedDeleted: result.completed, sessionsExpired: result.expiredSessions, renderJobsDeleted })
+  await recordAuditEvent({ actorType: "system", action: "retention.cleanup", metadata: { abandonedDeleted: result.abandoned, completedDeleted: result.completed, sessionsExpired: result.expiredSessions, rateLimitsDeleted: result.expiredRateLimits, renderJobsDeleted } })
+  return NextResponse.json({ ok: true, abandonedDeleted: result.abandoned, completedDeleted: result.completed, sessionsExpired: result.expiredSessions, rateLimitsDeleted: result.expiredRateLimits, renderJobsDeleted })
 }

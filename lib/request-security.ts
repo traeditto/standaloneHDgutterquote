@@ -60,6 +60,32 @@ export async function checkRateLimit(input: {
   }
 
   const now = Date.now()
+  if (process.env.DATABASE_URL || process.env.PLATFORM_DATABASE_URL) {
+    try {
+      const windowMs = input.windowSeconds * 1_000
+      const windowStartMs = Math.floor(now / windowMs) * windowMs
+      const { consumeDatabaseRateLimit } = await import("@/lib/platform-db")
+      const count = await consumeDatabaseRateLimit({
+        key,
+        windowStart: new Date(windowStartMs),
+        expiresAt: new Date(windowStartMs + windowMs * 2),
+      })
+      return {
+        allowed: count <= input.limit,
+        remaining: Math.max(0, input.limit - count),
+        retryAfter: Math.max(1, Math.ceil((windowStartMs + windowMs - now) / 1_000)),
+      }
+    } catch {
+      if (process.env.NODE_ENV === "production") {
+        return { allowed: false, remaining: 0, retryAfter: Math.min(input.windowSeconds, 60) }
+      }
+    }
+  }
+
+  if (process.env.NODE_ENV === "production") {
+    return { allowed: false, remaining: 0, retryAfter: Math.min(input.windowSeconds, 60) }
+  }
+
   const current = localBuckets.get(key)
   if (!current || current.resetAt <= now) {
     localBuckets.set(key, { count: 1, resetAt: now + input.windowSeconds * 1000 })

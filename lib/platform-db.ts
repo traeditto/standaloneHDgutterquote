@@ -47,6 +47,8 @@ export type TenantRecord = {
   deployment_url: string | null
   managed_domain: string | null
   clerk_org_id: string | null
+  terms_accepted_at: string | null
+  terms_version: string | null
   completed_lead_retention_months: number
   created_at: string
   updated_at: string
@@ -407,6 +409,14 @@ async function ensureSchema() {
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
       processed_at TIMESTAMPTZ
     );
+    CREATE TABLE IF NOT EXISTS gutterquote_rate_limits (
+      rate_key TEXT NOT NULL,
+      window_start TIMESTAMPTZ NOT NULL,
+      request_count INTEGER NOT NULL DEFAULT 1 CHECK (request_count > 0),
+      expires_at TIMESTAMPTZ NOT NULL,
+      PRIMARY KEY (rate_key, window_start)
+    );
+    CREATE INDEX IF NOT EXISTS gutterquote_rate_limits_expiry_idx ON gutterquote_rate_limits (expires_at);
     ALTER TABLE gutterquote_tenants ADD COLUMN IF NOT EXISTS stripe_subscription_id TEXT;
     ALTER TABLE gutterquote_tenants ADD COLUMN IF NOT EXISTS plan_code TEXT NOT NULL DEFAULT 'demo';
     ALTER TABLE gutterquote_tenants ADD COLUMN IF NOT EXISTS contact_name TEXT;
@@ -427,6 +437,8 @@ async function ensureSchema() {
     ALTER TABLE gutterquote_tenants ALTER COLUMN internal_id SET DEFAULT gen_random_uuid();
     ALTER TABLE gutterquote_tenants ALTER COLUMN internal_id SET NOT NULL;
     ALTER TABLE gutterquote_tenants ADD COLUMN IF NOT EXISTS clerk_org_id TEXT;
+    ALTER TABLE gutterquote_tenants ADD COLUMN IF NOT EXISTS terms_accepted_at TIMESTAMPTZ;
+    ALTER TABLE gutterquote_tenants ADD COLUMN IF NOT EXISTS terms_version TEXT;
     ALTER TABLE gutterquote_tenants ADD COLUMN IF NOT EXISTS completed_lead_retention_months INTEGER NOT NULL DEFAULT 24;
     ALTER TABLE gutterquote_leads ADD COLUMN IF NOT EXISTS render_attempts INTEGER NOT NULL DEFAULT 0;
     CREATE UNIQUE INDEX IF NOT EXISTS gutterquote_tenants_internal_id_idx ON gutterquote_tenants (internal_id);
@@ -534,6 +546,46 @@ export async function createSignupTenant(input: {
     [input.tenantId, input.companyName, input.leadEmail, input.contactName, input.phone, input.passwordHash, input.planCode],
   )
   return result.rows[0] ?? null
+}
+
+export async function recordTermsAcceptance(input: { tenantId: string; version: string; actorId: string }) {
+  await ensureSchema()
+  const result = await tenantQuery<TenantRecord>(
+    input.tenantId,
+    `UPDATE gutterquote_tenants
+     SET terms_accepted_at = NOW(), terms_version = $2, updated_at = NOW()
+     WHERE tenant_id = $1 RETURNING *`,
+    [input.tenantId, input.version],
+  )
+  if (!result.rows[0]) throw new Error("The contractor terms acceptance could not be recorded.")
+  await recordAuditEvent({
+    tenantId: input.tenantId,
+    actorType: "contractor",
+    actorId: input.actorId,
+    action: "legal.terms_accepted",
+    targetType: "tenant",
+    targetId: input.tenantId,
+    metadata: { version: input.version },
+  })
+  return result.rows[0]
+}
+
+export async function consumeDatabaseRateLimit(input: {
+  key: string
+  windowStart: Date
+  expiresAt: Date
+}) {
+  await ensureSchema()
+  const result = await systemDatabase().query<{ request_count: number }>(
+    `INSERT INTO gutterquote_rate_limits (rate_key, window_start, expires_at)
+     VALUES ($1, $2, $3)
+     ON CONFLICT (rate_key, window_start) DO UPDATE
+       SET request_count = gutterquote_rate_limits.request_count + 1,
+           expires_at = GREATEST(gutterquote_rate_limits.expires_at, EXCLUDED.expires_at)
+     RETURNING request_count`,
+    [input.key, input.windowStart, input.expiresAt],
+  )
+  return result.rows[0]?.request_count ?? 1
 }
 
 export async function updateTenantProfile(input: { tenantId: string; companyName: string; leadEmail: string; phone?: string; planCode?: "demo" | "launch" }) {
@@ -899,7 +951,16 @@ export async function runRetentionCleanup() {
     `SELECT id::text AS id, source_blob_url, result_blob_url
      FROM gutterquote_render_jobs WHERE expires_at <= NOW() ORDER BY expires_at ASC LIMIT 500`,
   )
-  return { abandoned: abandoned.rowCount, completed: completed.rowCount, expiredSessions: sessions.rowCount, jobs: jobs.rows }
+  const rateLimits = await systemDatabase().query(
+    "DELETE FROM gutterquote_rate_limits WHERE expires_at <= NOW() RETURNING rate_key",
+  )
+  return {
+    abandoned: abandoned.rowCount,
+    completed: completed.rowCount,
+    expiredSessions: sessions.rowCount,
+    expiredRateLimits: rateLimits.rowCount,
+    jobs: jobs.rows,
+  }
 }
 
 export async function deleteExpiredRenderJobs(jobIds: string[]) {

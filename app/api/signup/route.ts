@@ -1,7 +1,8 @@
 import { randomUUID } from "node:crypto"
 import { NextRequest, NextResponse } from "next/server"
 import { CONTRACTOR_COOKIE, createContractorSession } from "@/lib/contractor-auth"
-import { createSignupTenant, hashPassword, registerTenantDomain } from "@/lib/platform-db"
+import { LEGAL_TERMS_VERSION } from "@/lib/legal"
+import { createSignupTenant, hashPassword, recordTermsAcceptance, registerTenantDomain } from "@/lib/platform-db"
 import { checkRateLimit, rateLimitResponse, sameOrigin } from "@/lib/request-security"
 
 export const runtime = "nodejs"
@@ -81,6 +82,7 @@ export async function POST(request: NextRequest) {
     if (!tenant) {
       return NextResponse.json({ error: "We could not reserve a workspace name. Please try again." }, { status: 409 })
     }
+    await recordTermsAcceptance({ tenantId: tenant.tenant_id, version: LEGAL_TERMS_VERSION, actorId: `legacy:${tenant.tenant_id}` })
     if (process.env.TENANT_ROOT_DOMAIN) await registerTenantDomain({ tenantId: tenant.tenant_id, hostname: `${tenant.tenant_id}.${process.env.TENANT_ROOT_DOMAIN}`, verified: true, primary: true })
 
     const response = NextResponse.json({ ok: true, tenantId: tenant.tenant_id, plan: tenant.plan_code })

@@ -1,0 +1,3 @@
+export const LEGAL_TERMS_VERSION = "2026-07-23"
+export const SUPPORT_PHONE_DISPLAY = "(904) 478-9272"
+export const SUPPORT_PHONE_HREF = "tel:+19044789272"

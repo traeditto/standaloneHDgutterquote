@@ -1,12 +1,8 @@
 import "server-only"
 
 import Stripe from "stripe"
+import { launchCatalogMatches } from "@/lib/billing-pricing"
 import { getTenant, updateTenantStripeCustomer } from "@/lib/platform-db"
-
-const MONTHLY_PRICE_CENTS = 19_900
-const SETUP_PRICE_CENTS = 29_900
-const INTRO_DISCOUNT_CENTS = 5_000
-const INTRO_MONTHS = 3
 
 function stripeClient() {
   if (!process.env.STRIPE_SECRET_KEY) throw new Error("STRIPE_SECRET_KEY is not configured.")
@@ -44,19 +40,19 @@ export async function createSubscriptionCheckout(input: {
     stripe.prices.retrieve(setupPriceId),
     stripe.coupons.retrieve(introCouponId),
   ])
-  if (
-    monthlyPrice.unit_amount !== MONTHLY_PRICE_CENTS ||
-    monthlyPrice.currency !== "usd" ||
-    monthlyPrice.recurring?.interval !== "month" ||
-    setupPrice.unit_amount !== SETUP_PRICE_CENTS ||
-    setupPrice.currency !== "usd" ||
-    setupPrice.recurring ||
-    "deleted" in introCoupon ||
-    introCoupon.amount_off !== INTRO_DISCOUNT_CENTS ||
-    introCoupon.currency !== "usd" ||
-    introCoupon.duration !== "repeating" ||
-    introCoupon.duration_in_months !== INTRO_MONTHS
-  ) {
+  if (!launchCatalogMatches({
+    monthlyAmount: monthlyPrice.unit_amount,
+    monthlyCurrency: monthlyPrice.currency,
+    monthlyInterval: monthlyPrice.recurring?.interval,
+    setupAmount: setupPrice.unit_amount,
+    setupCurrency: setupPrice.currency,
+    setupRecurring: Boolean(setupPrice.recurring),
+    couponDeleted: "deleted" in introCoupon,
+    couponAmountOff: "deleted" in introCoupon ? null : introCoupon.amount_off,
+    couponCurrency: "deleted" in introCoupon ? null : introCoupon.currency,
+    couponDuration: "deleted" in introCoupon ? undefined : introCoupon.duration,
+    couponDurationMonths: "deleted" in introCoupon ? null : introCoupon.duration_in_months,
+  })) {
     throw new Error("Stripe launch pricing does not match $299 setup, $149/month for three months, then $199/month.")
   }
   const customer = await ensureCustomer(input.tenantId)
