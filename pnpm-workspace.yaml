@@ -3,6 +3,7 @@ packages:
 
 overrides:
   hono: 4.12.25
+  postcss: 8.5.12
   sharp: 0.35.3
 
 onlyBuiltDependencies:
