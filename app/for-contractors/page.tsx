@@ -102,12 +102,48 @@ export default function ForContractorsPage() {
       </section>
 
       <section className="growth-pricing" id="pricing">
-        <div className="growth-heading"><span>STRAIGHTFORWARD LAUNCH</span><h2>Build free. Pay when the site is approved.</h2><p>Use the same commercial model as HD Instant Gutter Quote while validating gutter demand.</p></div>
-        <article className="growth-pricing-card">
-          <div><small>MANAGED LAUNCH</small><strong>$149<span>/month for 3 months</span></strong><p>Then $199/month</p></div>
-          <ul><li><Check size={15} /> $299 one-time setup</li><li><Check size={15} /> Standalone site and website widget</li><li><Check size={15} /> Contractor portal and lead delivery</li><li><Check size={15} /> Managed domain and platform updates</li><li><Check size={15} /> One free demo visualization</li><li><Check size={15} /> Additional rendering credit packs available</li></ul>
-          <Link href="/sign-up" className="sales-button">Build My Free Gutter Quote Site <ArrowRight size={16} /></Link>
-        </article>
+        <div className="growth-heading">
+          <span>LOW-FRICTION PRICING</span>
+          <h2>Build it free. Pay when it has earned your confidence.</h2>
+          <p>No sales call, credit card, or setup fee is required to create and test your private gutter quote site.</p>
+        </div>
+        <div className="growth-price-layout">
+          <article className="growth-price-card">
+            <small>FREE BUILD</small>
+            <h3><span>$</span>0</h3>
+            <p>Build your branded gutter experience, test real addresses, and use one visualization.</p>
+            <ul>
+              <li><Check size={15} /> Self-service account and gutter template</li>
+              <li><Check size={15} /> Your products, colors, pricing, and service area</li>
+              <li><Check size={15} /> Complete private homeowner preview</li>
+              <li><Check size={15} /> One demo visualization</li>
+              <li><Check size={15} /> No credit card</li>
+            </ul>
+            <Link href="/sign-up" className="sales-button sales-button--outline">Build My Free Quote Site <ArrowRight size={15} /></Link>
+          </article>
+          <article className="growth-price-card growth-price-card--paid">
+            <small>LAUNCH</small>
+            <h3><span>$</span>149 <em>/month</em></h3>
+            <p><b>First three months</b> · then $199/month</p>
+            <div className="growth-setup-fee">
+              <strong>$299 one-time setup</strong>
+              <span>Production activation, domain connection, standalone site, widget delivery, lead routing, dashboard access, and launch verification.</span>
+            </div>
+            <ul>
+              <li><Check size={15} /> White-labeled standalone gutter quote site</li>
+              <li><Check size={15} /> Website widget and install code</li>
+              <li><Check size={15} /> Lead email delivery and contractor portal</li>
+              <li><Check size={15} /> Managed domain and platform updates</li>
+              <li><Check size={15} /> Hosting, security, and ongoing product updates</li>
+              <li><Check size={15} /> Additional visualization credit packs available</li>
+            </ul>
+            <Link href="/sign-up" className="sales-button">See Mine Before I Pay <ArrowRight size={15} /></Link>
+          </article>
+        </div>
+        <div className="growth-savings">
+          <span><BadgeCheck size={20} /></span>
+          <p><b>Build before you buy.</b> Your first-year platform fees total $2,537 before optional visualization packs, and payment begins only after you approve the private homeowner experience.</p>
+        </div>
       </section>
 
       <section className="growth-final-cta"><div><span>NO PAYMENT TO BUILD</span><h2>Put your gutter company inside the product.</h2><p>Configure real systems and pricing, test familiar properties, and approve the full homeowner journey before launch.</p></div><Link href="/sign-up" className="sales-button">Start Free <ArrowRight size={16} /></Link></section>
