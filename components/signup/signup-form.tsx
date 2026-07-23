@@ -92,7 +92,7 @@ export function SignupForm({ initialPlan, initialMode = "signup" }: { initialPla
             <span><b>Free Demo</b><small>Build and test privately</small></span><strong>$0</strong>
           </button>
           <button type="button" role="radio" aria-checked={plan === "launch"} className={plan === "launch" ? "is-selected" : ""} onClick={() => setPlan("launch")}>
-            <span><b>Managed Launch</b><small>$499 setup after approval</small></span><strong>$199 <small>/mo for 3 months, then $249/mo</small></strong>
+            <span><b>Managed Launch</b><small>$299 setup after approval</small></span><strong>$149 <small>/mo for 3 months, then $199/mo</small></strong>
           </button>
         </div>}
 

@@ -104,8 +104,8 @@ export default function ForContractorsPage() {
       <section className="growth-pricing" id="pricing">
         <div className="growth-heading"><span>STRAIGHTFORWARD LAUNCH</span><h2>Build free. Pay when the site is approved.</h2><p>Use the same commercial model as HD Instant Gutter Quote while validating gutter demand.</p></div>
         <article className="growth-pricing-card">
-          <div><small>MANAGED LAUNCH</small><strong>$199<span>/month for 3 months</span></strong><p>Then $249/month</p></div>
-          <ul><li><Check size={15} /> $499 one-time setup</li><li><Check size={15} /> Standalone site and website widget</li><li><Check size={15} /> Contractor portal and lead delivery</li><li><Check size={15} /> Managed domain and platform updates</li><li><Check size={15} /> One free demo visualization</li><li><Check size={15} /> Additional rendering credit packs available</li></ul>
+          <div><small>MANAGED LAUNCH</small><strong>$149<span>/month for 3 months</span></strong><p>Then $199/month</p></div>
+          <ul><li><Check size={15} /> $299 one-time setup</li><li><Check size={15} /> Standalone site and website widget</li><li><Check size={15} /> Contractor portal and lead delivery</li><li><Check size={15} /> Managed domain and platform updates</li><li><Check size={15} /> One free demo visualization</li><li><Check size={15} /> Additional rendering credit packs available</li></ul>
           <Link href="/sign-up" className="sales-button">Build My Free Gutter Quote Site <ArrowRight size={16} /></Link>
         </article>
       </section>

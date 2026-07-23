@@ -17,7 +17,7 @@ HD Instant Gutter Quote is one multi-tenant Next.js application for the sales si
 1. A contractor creates a free workspace and builds the branded experience in `/setup`.
 2. `/preview` tests full address, product, pricing, and one demo render before payment.
 3. Approval freezes an immutable configuration.
-4. Stripe collects the $499 setup fee and starts $199/month for three months, then $249/month.
+4. Stripe collects the $299 setup fee and starts $149/month for three months, then $199/month.
 5. The approved domain is attached to the shared Vercel project and registered to the tenant.
 6. Stripe webhooks update tenant access without pausing the shared project.
 

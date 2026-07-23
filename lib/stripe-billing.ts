@@ -3,6 +3,11 @@ import "server-only"
 import Stripe from "stripe"
 import { getTenant, updateTenantStripeCustomer } from "@/lib/platform-db"
 
+const MONTHLY_PRICE_CENTS = 19_900
+const SETUP_PRICE_CENTS = 29_900
+const INTRO_DISCOUNT_CENTS = 5_000
+const INTRO_MONTHS = 3
+
 function stripeClient() {
   if (!process.env.STRIPE_SECRET_KEY) throw new Error("STRIPE_SECRET_KEY is not configured.")
   return new Stripe(process.env.STRIPE_SECRET_KEY)
@@ -27,31 +32,50 @@ export async function createSubscriptionCheckout(input: {
   returnUrl: string
   launch?: { domain: string; siteVersionId: string; approvedBy: string }
 }) {
-  if (!process.env.STRIPE_SUBSCRIPTION_PRICE_ID) {
-    throw new Error("STRIPE_SUBSCRIPTION_PRICE_ID is not configured.")
+  const monthlyPriceId = process.env.STRIPE_SUBSCRIPTION_PRICE_ID
+  const setupPriceId = process.env.STRIPE_SETUP_PRICE_ID
+  const introCouponId = process.env.STRIPE_INTRO_COUPON_ID
+  if (!monthlyPriceId || !setupPriceId || !introCouponId) {
+    throw new Error("The $299 setup, $149 introductory, and $199 monthly Stripe pricing is not fully configured.")
+  }
+  const stripe = stripeClient()
+  const [monthlyPrice, setupPrice, introCoupon] = await Promise.all([
+    stripe.prices.retrieve(monthlyPriceId),
+    stripe.prices.retrieve(setupPriceId),
+    stripe.coupons.retrieve(introCouponId),
+  ])
+  if (
+    monthlyPrice.unit_amount !== MONTHLY_PRICE_CENTS ||
+    monthlyPrice.currency !== "usd" ||
+    monthlyPrice.recurring?.interval !== "month" ||
+    setupPrice.unit_amount !== SETUP_PRICE_CENTS ||
+    setupPrice.currency !== "usd" ||
+    setupPrice.recurring ||
+    "deleted" in introCoupon ||
+    introCoupon.amount_off !== INTRO_DISCOUNT_CENTS ||
+    introCoupon.currency !== "usd" ||
+    introCoupon.duration !== "repeating" ||
+    introCoupon.duration_in_months !== INTRO_MONTHS
+  ) {
+    throw new Error("Stripe launch pricing does not match $299 setup, $149/month for three months, then $199/month.")
   }
   const customer = await ensureCustomer(input.tenantId)
   const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [
-    { price: process.env.STRIPE_SUBSCRIPTION_PRICE_ID, quantity: 1 },
+    { price: monthlyPriceId, quantity: 1 },
+    { price: setupPriceId, quantity: 1 },
   ]
-  if (process.env.STRIPE_SETUP_PRICE_ID) {
-    lineItems.push({ price: process.env.STRIPE_SETUP_PRICE_ID, quantity: 1 })
-  }
-  const introCoupon = process.env.STRIPE_INTRO_COUPON_ID
   const launchMetadata: Record<string, string> = {}
   if (input.launch) {
     launchMetadata.launchDomain = input.launch.domain
     launchMetadata.launchSiteVersionId = input.launch.siteVersionId
     launchMetadata.launchApprovedBy = input.launch.approvedBy
   }
-  const session = await stripeClient().checkout.sessions.create({
+  const session = await stripe.checkout.sessions.create({
     mode: "subscription",
     customer,
     client_reference_id: input.tenantId,
     line_items: lineItems,
-    ...(introCoupon
-      ? { discounts: [{ coupon: introCoupon }] }
-      : { allow_promotion_codes: true }),
+    discounts: [{ coupon: introCouponId }],
     success_url: `${input.returnUrl}${input.returnUrl.includes("?") ? "&" : "?"}subscription=success&session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${input.returnUrl}${input.returnUrl.includes("?") ? "&" : "?"}subscription=cancelled`,
     metadata: { tenantId: input.tenantId, ...launchMetadata },
