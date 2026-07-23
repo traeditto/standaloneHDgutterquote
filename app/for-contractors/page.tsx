@@ -14,7 +14,6 @@ import {
   Code2,
   Droplets,
   Globe2,
-  House,
   MailCheck,
   MapPin,
   MoonStar,
@@ -95,6 +94,55 @@ function StatusCell({ children, positive = false }: { children: string; positive
   return <span className={positive ? "is-positive" : "is-limited"}>{positive ? <CheckCircle2 size={15} /> : <X size={15} />}{children}</span>
 }
 
+function ContractorWidgetScene({ open = false }: { open?: boolean }) {
+  return (
+    <div className={`example-customer-site ${open ? "is-widget-open" : ""}`}>
+      <div className="example-contractor-topbar">
+        <span><MapPin size={8} /> Serving Jacksonville &amp; Northeast Florida</span>
+        <div><b>Licensed &amp; insured</b><i /> <strong>(904) 555-0186</strong></div>
+      </div>
+      <div className="example-contractor-nav">
+        <b><span><Droplets size={14} /></span><i><strong>SUMMIT</strong><small>SEAMLESS GUTTERS</small></i></b>
+        <div><i>Gutter Installation</i><i>Gutter Guards</i><i>Gallery</i><i>Reviews</i><i>Service Area</i><em>Free Estimate</em></div>
+      </div>
+      <div className="example-contractor-hero">
+        <Image src="/examples/florida-gutter-home.jpg" alt="" fill sizes="(max-width: 1100px) 90vw, 45vw" />
+        <div className="example-contractor-veil" />
+        <div className="example-contractor-copy">
+          <small>LOCAL. LICENSED. BUILT FOR FLORIDA.</small>
+          <h3>Seamless gutters that protect your home and look the part.</h3>
+          <p>Custom-fit aluminum gutters, gutter guards, and dependable installation from a local crew.</p>
+          <div><span>Get My Free Estimate <ArrowRight size={9} /></span><em>See Our Work</em></div>
+        </div>
+        <div className="example-contractor-review"><strong>4.9</strong><span>★★★★★<small>127 Google reviews</small></span></div>
+      </div>
+      <div className="example-contractor-proof">
+        <div><BadgeCheck size={14} /><span><b>Licensed &amp; insured</b><small>Local installation team</small></span></div>
+        <div><ShieldCheck size={14} /><span><b>Workmanship warranty</b><small>Protection after installation</small></span></div>
+        <div><Clock3 size={14} /><span><b>Fast local response</b><small>Serving Northeast Florida</small></span></div>
+      </div>
+      <div className="example-floating-launcher"><Sparkles size={11} /><span>Get an instant gutter quote</span></div>
+      {open && (
+        <div className="example-widget-overlay">
+          <div className="example-widget-modal">
+            <span className="example-widget-close">×</span>
+            <div className="example-widget-modal__brand"><span><Droplets size={12} /></span><div><b>SUMMIT SEAMLESS GUTTERS</b><small>Instant online estimate</small></div></div>
+            <div className="example-widget-modal__steps"><span className="is-active">1<small>Property</small></span><i /><span>2<small>System</small></span><i /><span>3<small>Color</small></span><i /><span>4<small>Estimate</small></span></div>
+            <div className="example-widget-modal__body">
+              <small>LET&apos;S START WITH YOUR HOME</small>
+              <h4>Where is your property?</h4>
+              <p>Enter the address to begin your personalized gutter estimate.</p>
+              <div className="example-widget-input"><MapPin size={13} /><span>Enter your street address</span></div>
+              <b>Continue to My Home <ArrowRight size={10} /></b>
+              <em><ShieldCheck size={9} /> Secure · No obligation · About 60 seconds</em>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function ForContractorsPage() {
   return (
     <main className="sales-site contractor-landing growth-page">
@@ -137,51 +185,25 @@ export default function ForContractorsPage() {
       </section>
 
       <section className="growth-examples" id="examples" aria-labelledby="examples-title">
-        <div className="growth-heading"><span>TWO WAYS TO PUT IT TO WORK</span><h2 id="examples-title">A real sales experience. Built around your gutter company.</h2><p>Keep homeowners inside your brand from the first click through the estimate and appointment—on the website you already own or a focused standalone quote site.</p></div>
+        <div className="growth-heading"><span>SEE THE REAL WEBSITE WIDGET</span><h2 id="examples-title">A small button opens a complete sales experience.</h2><p>The widget stays out of the way until a homeowner is ready. One click opens the full branded quote journey over the contractor&apos;s existing website—without sending the visitor to another page.</p></div>
         <div className="growth-example-grid">
           <article className="growth-example-card">
-            <div className="growth-example-card__label"><span><Code2 size={16} /> WEBSITE WIDGET</span><small>Embedded in your existing site</small></div>
+            <div className="growth-example-card__label"><span><Code2 size={16} /> 1 · WIDGET AT REST</span><small>Floating on the contractor&apos;s website</small></div>
             <div className="growth-example-stage" aria-hidden="true">
-              <div className="example-customer-site">
-                <div className="example-contractor-topbar">
-                  <span><MapPin size={8} /> Serving Jacksonville &amp; Northeast Florida</span>
-                  <div><b>Licensed &amp; insured</b><i /> <strong>(904) 555-0186</strong></div>
-                </div>
-                <div className="example-contractor-nav">
-                  <b><span><Droplets size={14} /></span><i><strong>SUMMIT</strong><small>SEAMLESS GUTTERS</small></i></b>
-                  <div><i>Gutter Installation</i><i>Gutter Guards</i><i>Gallery</i><i>Reviews</i><i>Service Area</i><em>Free Estimate</em></div>
-                </div>
-                <div className="example-contractor-hero">
-                  <Image src="/examples/florida-gutter-home.jpg" alt="" fill sizes="(max-width: 1100px) 90vw, 45vw" />
-                  <div className="example-contractor-veil" />
-                  <div className="example-contractor-copy">
-                    <small>LOCAL. LICENSED. BUILT FOR FLORIDA.</small>
-                    <h3>Seamless gutters that protect your home and look the part.</h3>
-                    <p>Custom-fit aluminum gutters, gutter guards, and dependable installation from a local crew.</p>
-                    <div><span>Get My Free Estimate <ArrowRight size={9} /></span><em>See Our Work</em></div>
-                  </div>
-                  <div className="example-contractor-review"><strong>4.9</strong><span>★★★★★<small>127 Google reviews</small></span></div>
-                </div>
-                <div className="example-embed-section">
-                  <div className="example-embed-copy">
-                    <small>INSTANT ONLINE ESTIMATE</small>
-                    <h4>See what new gutters could cost.</h4>
-                    <p>Get a planning range for your home before scheduling a visit.</p>
-                    <div><span><Check size={8} /> No phone call</span><span><Check size={8} /> Takes about 60 seconds</span></div>
-                  </div>
-                  <div className="example-widget-panel">
-                    <header><span><House size={11} /> START WITH YOUR PROPERTY</span><small>Step 1 of 4</small></header>
-                    <div className="example-widget-input"><MapPin size={12} /><span>Enter your street address</span></div>
-                    <b>Get My Instant Estimate <ArrowRight size={10} /></b>
-                    <em><ShieldCheck size={9} /> Secure · No obligation</em>
-                  </div>
-                </div>
-              </div>
+              <ContractorWidgetScene />
             </div>
-            <div className="growth-example-card__copy"><b>Your current website becomes a 24/7 sales rep.</b><p>The branded quote flow sits directly inside your site, giving high-intent homeowners a useful next step without sending them somewhere else.</p></div>
+            <div className="growth-example-card__copy"><b>Present on every high-intent page.</b><p>The branded launcher floats at the lower corner of the contractor&apos;s current site and stays available as homeowners browse.</p></div>
           </article>
 
           <article className="growth-example-card">
+            <div className="growth-example-card__label"><span><Sparkles size={16} /> 2 · AFTER THE CLICK</span><small>The complete quote opens in a modal</small></div>
+            <div className="growth-example-stage" aria-hidden="true">
+              <ContractorWidgetScene open />
+            </div>
+            <div className="growth-example-card__copy"><b>The full quote journey opens without losing the visitor.</b><p>The contractor website remains underneath while the secure, white-labeled estimate experience takes over the screen.</p></div>
+          </article>
+
+          <article className="growth-example-card growth-example-card--standalone">
             <div className="growth-example-card__label"><span><Globe2 size={16} /> STANDALONE QUOTE SITE</span><small>Your domain. Your brand. One goal.</small></div>
             <div className="growth-example-stage" aria-hidden="true">
               <div className="example-standalone-browser">
