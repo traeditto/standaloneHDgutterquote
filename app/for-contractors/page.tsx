@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react"
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import {
   ArrowRight,
@@ -136,42 +137,74 @@ export default function ForContractorsPage() {
       </section>
 
       <section className="growth-examples" id="examples" aria-labelledby="examples-title">
-        <div className="growth-heading growth-heading--light"><span>TWO WAYS TO PUT IT TO WORK</span><h2 id="examples-title">See exactly how it can look for a gutter company.</h2><p>Use the quote experience inside the website you already have, launch it as a focused standalone page, or run both together under one brand.</p></div>
+        <div className="growth-heading"><span>TWO WAYS TO PUT IT TO WORK</span><h2 id="examples-title">A real sales experience. Built around your gutter company.</h2><p>Keep homeowners inside your brand from the first click through the estimate and appointment—on the website you already own or a focused standalone quote site.</p></div>
         <div className="growth-example-grid">
           <article className="growth-example-card">
-            <header><span><Code2 size={16} /> WEBSITE WIDGET</span><small>Lives inside your current site</small></header>
-            <div className="growth-example-stage growth-example-stage--widget" aria-hidden="true">
+            <div className="growth-example-card__label"><span><Code2 size={16} /> WEBSITE WIDGET</span><small>Embedded in your existing site</small></div>
+            <div className="growth-example-stage" aria-hidden="true">
               <div className="example-customer-site">
-                <div className="example-site-nav"><b><span>S</span> Summit Gutter Co.</b><div><i>Services</i><i>Our Work</i><i>Reviews</i><em>Get a Quote</em></div></div>
-                <div className="example-site-hero">
-                  <div><small>JACKSONVILLE&apos;S GUTTER SPECIALISTS</small><h3>Protect your home from Florida storms.</h3><p>Seamless gutters installed by a local crew that stands behind the work.</p><span>View Our Work <ArrowRight size={9} /></span></div>
-                  <div className="example-house-scene"><i /><i /><span /></div>
+                <div className="example-site-nav">
+                  <b><span><Droplets size={13} /></span><i>Summit</i> Gutter Co.</b>
+                  <div><i>Services</i><i>Gutter Guards</i><i>Our Work</i><i>Reviews</i><em>Get an Estimate</em></div>
                 </div>
-                <div className="example-widget-shell">
-                  <div className="example-widget-copy"><small>FREE INSTANT ESTIMATE</small><h4>See what new gutters could cost.</h4><p>Start with the property. No phone call required.</p></div>
-                  <div className="example-widget-action"><div><MapPin size={12} /><span>Enter your home address</span></div><b>Start My Estimate <ArrowRight size={10} /></b><small><ShieldCheck size={9} /> Private and secure</small></div>
+                <div className="example-site-hero">
+                  <Image src="/examples/florida-gutter-home.jpg" alt="" fill sizes="(max-width: 1100px) 90vw, 45vw" />
+                  <div className="example-site-veil" />
+                  <div className="example-site-copy"><small>SEAMLESS GUTTERS · JACKSONVILLE, FL</small><h3>Protect your home.<br /><em>Love the curb appeal.</em></h3><p>Locally installed gutter systems designed around your home, your finish, and your budget.</p><span>See Recent Projects <ArrowRight size={10} /></span></div>
+                  <div className="example-widget-panel">
+                    <div className="example-widget-steps"><span className="is-active">1</span><i /><span>2</span><i /><span>3</span><i /><span>4</span></div>
+                    <small>GET YOUR FREE PLANNING ESTIMATE</small>
+                    <h4>Where is your property?</h4>
+                    <p>Start with the home. No phone call or measuring tape required.</p>
+                    <div className="example-widget-input"><MapPin size={13} /><span>Enter your street address</span></div>
+                    <b>See My Gutter Estimate <ArrowRight size={11} /></b>
+                    <em><ShieldCheck size={10} /> Private, secure, and no obligation</em>
+                  </div>
+                </div>
+                <div className="example-site-proof">
+                  <div><strong>4.9</strong><span>★★★★★<small>127 Google reviews</small></span></div>
+                  <div><BadgeCheck size={15} /><span><b>Licensed &amp; insured</b><small>Local installation team</small></span></div>
+                  <div><ShieldCheck size={15} /><span><b>Workmanship warranty</b><small>Built to protect your home</small></span></div>
                 </div>
               </div>
             </div>
-            <div className="growth-example-card__copy"><b>Keep the website you already own.</b><p>Place the quote experience inside a high-intent page so homeowners can start without leaving your brand or opening another tab.</p></div>
+            <div className="growth-example-card__copy"><b>Your current website becomes a 24/7 sales rep.</b><p>The branded quote flow sits directly inside your site, giving high-intent homeowners a useful next step without sending them somewhere else.</p></div>
           </article>
 
           <article className="growth-example-card">
-            <header><span><Globe2 size={16} /> STANDALONE BRANDED PAGE</span><small>A focused campaign destination</small></header>
-            <div className="growth-example-stage growth-example-stage--standalone" aria-hidden="true">
+            <div className="growth-example-card__label"><span><Globe2 size={16} /> STANDALONE QUOTE SITE</span><small>Your domain. Your brand. One goal.</small></div>
+            <div className="growth-example-stage" aria-hidden="true">
               <div className="example-standalone-browser">
-                <div className="example-browser-bar"><i /><i /><i /><span>estimate.summitgutterco.com</span><em>SECURE</em></div>
-                <div className="example-branded-nav"><b><span>S</span> Summit Gutter Co.</b><small><ShieldCheck size={9} /> Licensed · Insured · Local</small></div>
+                <div className="example-browser-bar"><i /><i /><i /><span><ShieldCheck size={8} /> estimate.summitgutterco.com</span><em>SECURE</em></div>
+                <div className="example-branded-nav"><b><span><Droplets size={13} /></span><i>Summit</i> Gutter Co.</b><small><ShieldCheck size={9} /> Licensed · Insured · Local</small></div>
+                <div className="example-quote-progress"><span className="is-done"><Check size={9} /> Property</span><i /><span className="is-done"><Check size={9} /> System</span><i /><span className="is-active">3 Color</span><i /><span>4 Estimate</span></div>
                 <div className="example-standalone-main">
-                  <div className="example-standalone-copy"><small>INSTANT GUTTER ESTIMATE</small><h3>Better gutters start with your address.</h3><p>See a planning price range, compare systems, and explore colors on your home.</p><div><MapPin size={12} /><span>123 Main Street, Jacksonville, FL</span><CheckCircle2 size={11} /></div><b>See My Options <ArrowRight size={10} /></b></div>
-                  <div className="example-standalone-result"><div className="example-result-home"><i /><span /></div><small>PLANNING ESTIMATE</small><strong>$2,840–$3,420</strong><p>184 linear ft · field verification required</p><em><CalendarCheck size={10} /> Request an appointment</em></div>
+                  <div className="example-visualizer">
+                    <div className="example-visualizer__top"><span><Sparkles size={10} /> YOUR HOME PREVIEW</span><small>123 Main Street, Jacksonville, FL</small></div>
+                    <div className="example-result-home">
+                      <Image src="/examples/florida-gutter-home.jpg" alt="" fill sizes="(max-width: 1100px) 88vw, 29vw" />
+                      <span className="example-gutter-line example-gutter-line--left" />
+                      <span className="example-gutter-line example-gutter-line--center" />
+                      <span className="example-gutter-line example-gutter-line--right" />
+                      <em>Charcoal</em>
+                    </div>
+                    <div className="example-color-picker"><span>SELECTED FINISH</span><b><i /><i /><i className="is-selected" /><i /><i /></b><strong>Charcoal</strong></div>
+                  </div>
+                  <div className="example-standalone-result">
+                    <small>YOUR PLANNING ESTIMATE</small>
+                    <strong>$2,840–$3,420</strong>
+                    <p>6&quot; seamless aluminum · 184 estimated linear ft</p>
+                    <ul><li><Check size={10} /> Seamless gutter system</li><li><Check size={10} /> 6 downspouts</li><li><Check size={10} /> Charcoal baked-on finish</li></ul>
+                    <div><CalendarCheck size={13} /><span><b>Ready for exact pricing?</b><small>Choose a convenient appointment.</small></span></div>
+                    <em>Book My Free Consultation <ArrowRight size={10} /></em>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="growth-example-card__copy"><b>Send ad traffic to one job-focused experience.</b><p>Use a branded domain and distraction-free page for Google Ads, social campaigns, QR codes, email, and direct homeowner sharing.</p></div>
+            <div className="growth-example-card__copy"><b>A focused destination built to turn clicks into appointments.</b><p>Send Google Ads, social traffic, mailer QR codes, and referrals to a branded quote site with no navigation distractions.</p></div>
           </article>
         </div>
-        <div className="growth-examples-note"><span><BadgeCheck size={18} /></span><p><b>Illustrative contractor examples.</b> Your live version uses your company name, logo, colors, products, pricing, service area, contact details, and domain.</p><Link href="/sign-up">Render My Company Version <ArrowRight size={14} /></Link></div>
+        <div className="growth-examples-note"><span><BadgeCheck size={18} /></span><p><b>These are illustrative, fully rendered examples.</b> Your live version uses your real company name, logo, colors, products, pricing, service area, reviews, contact details, and domain.</p><Link href="/sign-up">See It With My Brand <ArrowRight size={14} /></Link></div>
       </section>
 
       <section className="growth-journey" id="how-it-works" aria-labelledby="journey-title">
