@@ -143,28 +143,38 @@ export default function ForContractorsPage() {
             <div className="growth-example-card__label"><span><Code2 size={16} /> WEBSITE WIDGET</span><small>Embedded in your existing site</small></div>
             <div className="growth-example-stage" aria-hidden="true">
               <div className="example-customer-site">
-                <div className="example-site-nav">
-                  <b><span><Droplets size={13} /></span><i>Summit</i> Gutter Co.</b>
-                  <div><i>Services</i><i>Gutter Guards</i><i>Our Work</i><i>Reviews</i><em>Get an Estimate</em></div>
+                <div className="example-contractor-topbar">
+                  <span><MapPin size={8} /> Serving Jacksonville &amp; Northeast Florida</span>
+                  <div><b>Licensed &amp; insured</b><i /> <strong>(904) 555-0186</strong></div>
                 </div>
-                <div className="example-site-hero">
+                <div className="example-contractor-nav">
+                  <b><span><Droplets size={14} /></span><i><strong>SUMMIT</strong><small>SEAMLESS GUTTERS</small></i></b>
+                  <div><i>Gutter Installation</i><i>Gutter Guards</i><i>Gallery</i><i>Reviews</i><i>Service Area</i><em>Free Estimate</em></div>
+                </div>
+                <div className="example-contractor-hero">
                   <Image src="/examples/florida-gutter-home.jpg" alt="" fill sizes="(max-width: 1100px) 90vw, 45vw" />
-                  <div className="example-site-veil" />
-                  <div className="example-site-copy"><small>SEAMLESS GUTTERS · JACKSONVILLE, FL</small><h3>Protect your home.<br /><em>Love the curb appeal.</em></h3><p>Locally installed gutter systems designed around your home, your finish, and your budget.</p><span>See Recent Projects <ArrowRight size={10} /></span></div>
-                  <div className="example-widget-panel">
-                    <div className="example-widget-steps"><span className="is-active">1</span><i /><span>2</span><i /><span>3</span><i /><span>4</span></div>
-                    <small>GET YOUR FREE PLANNING ESTIMATE</small>
-                    <h4>Where is your property?</h4>
-                    <p>Start with the home. No phone call or measuring tape required.</p>
-                    <div className="example-widget-input"><MapPin size={13} /><span>Enter your street address</span></div>
-                    <b>See My Gutter Estimate <ArrowRight size={11} /></b>
-                    <em><ShieldCheck size={10} /> Private, secure, and no obligation</em>
+                  <div className="example-contractor-veil" />
+                  <div className="example-contractor-copy">
+                    <small>LOCAL. LICENSED. BUILT FOR FLORIDA.</small>
+                    <h3>Seamless gutters that protect your home and look the part.</h3>
+                    <p>Custom-fit aluminum gutters, gutter guards, and dependable installation from a local crew.</p>
+                    <div><span>Get My Free Estimate <ArrowRight size={9} /></span><em>See Our Work</em></div>
                   </div>
+                  <div className="example-contractor-review"><strong>4.9</strong><span>★★★★★<small>127 Google reviews</small></span></div>
                 </div>
-                <div className="example-site-proof">
-                  <div><strong>4.9</strong><span>★★★★★<small>127 Google reviews</small></span></div>
-                  <div><BadgeCheck size={15} /><span><b>Licensed &amp; insured</b><small>Local installation team</small></span></div>
-                  <div><ShieldCheck size={15} /><span><b>Workmanship warranty</b><small>Built to protect your home</small></span></div>
+                <div className="example-embed-section">
+                  <div className="example-embed-copy">
+                    <small>INSTANT ONLINE ESTIMATE</small>
+                    <h4>See what new gutters could cost.</h4>
+                    <p>Get a planning range for your home before scheduling a visit.</p>
+                    <div><span><Check size={8} /> No phone call</span><span><Check size={8} /> Takes about 60 seconds</span></div>
+                  </div>
+                  <div className="example-widget-panel">
+                    <header><span><House size={11} /> START WITH YOUR PROPERTY</span><small>Step 1 of 4</small></header>
+                    <div className="example-widget-input"><MapPin size={12} /><span>Enter your street address</span></div>
+                    <b>Get My Instant Estimate <ArrowRight size={10} /></b>
+                    <em><ShieldCheck size={9} /> Secure · No obligation</em>
+                  </div>
                 </div>
               </div>
             </div>
