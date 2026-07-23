@@ -10,7 +10,7 @@ export function RoiCalculator() {
   const [traffic, setTraffic] = useState(1000)
   const [conversionLift, setConversionLift] = useState(1.5)
   const [closeRate, setCloseRate] = useState(30)
-  const [ticket, setTicket] = useState(15000)
+  const [ticket, setTicket] = useState(3000)
   const result = useMemo(() => {
     const inspections = Math.max(0, traffic) * Math.max(0, conversionLift) / 100
     const jobs = inspections * Math.max(0, closeRate) / 100
