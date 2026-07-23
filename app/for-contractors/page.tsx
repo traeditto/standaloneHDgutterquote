@@ -151,7 +151,7 @@ export default function ForContractorsPage() {
           <span><Droplets size={19} /><Sparkles size={11} /></span><b>HD Instant</b> Gutter Quote <small className="sales-brand-owner">by HD Precision</small>
         </Link>
         <nav aria-label="Main navigation"><a href="#examples">Examples</a><a href="#how-it-works">How it works</a><a href="#roi">ROI</a><a href="#compare">Compare</a><a href="#pricing">Pricing</a></nav>
-        <div className="sales-nav__actions"><Link href="/sign-in">Sign in</Link><Link href="/sign-up" className="sales-button sales-button--small">See It On My Website <ArrowRight size={14} /></Link></div>
+        <div className="sales-nav__actions"><Link href="/sign-in">Sign in</Link><Link href="/sign-up" className="sales-button sales-button--small">Build My Free Quote Site <ArrowRight size={14} /></Link></div>
       </header>
 
       <section className="growth-hero" aria-labelledby="hero-title">
@@ -160,7 +160,7 @@ export default function ForContractorsPage() {
           <div className="sales-kicker"><span><Zap size={13} /></span> 24/7 quoting and appointment capture</div>
           <h1 id="hero-title">Turn Website Visitors Into <em>Booked Gutter Estimates</em>—24/7.</h1>
           <p>Give homeowners the answers they want now—property-aware pricing, product options, and a visual preview—then hand your team a better-qualified sales opportunity.</p>
-          <div className="sales-hero__actions"><Link href="/sign-up" className="sales-button">See It On My Website <ArrowRight size={16} /></Link><a href="#how-it-works" className="sales-button sales-button--ghost">Watch Live Demo <ArrowRight size={15} /></a></div>
+          <div className="sales-hero__actions"><Link href="/sign-up" className="sales-button">Build My Free Quote Site <ArrowRight size={16} /></Link><a href="#how-it-works" className="sales-button sales-button--ghost">Watch Live Demo <ArrowRight size={15} /></a></div>
           <div className="growth-trust-line"><span><Check size={13} /> Build your version free</span><span><Check size={13} /> No credit card</span><span><Check size={13} /> Approve before launch</span></div>
         </div>
         <div className="growth-product-preview" aria-label="Example homeowner gutter estimate">
@@ -309,7 +309,7 @@ export default function ForContractorsPage() {
               <li><Check size={15} /> One demo visualization</li>
               <li><Check size={15} /> No credit card</li>
             </ul>
-            <Link href="/sign-up" className="sales-button sales-button--outline">See It On My Website <ArrowRight size={15} /></Link>
+            <Link href="/sign-up" className="sales-button sales-button--outline">Build My Free Quote Site <ArrowRight size={15} /></Link>
           </article>
           <article className="growth-price-card growth-price-card--paid">
             <small>MANAGED LAUNCH</small>
