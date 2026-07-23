@@ -101,7 +101,7 @@ export default function ForContractorsPage() {
         <Link href="/for-contractors" className="sales-brand" aria-label="HD Instant Gutter Quote home">
           <span><Droplets size={19} /><Sparkles size={11} /></span><b>HD Instant</b> Gutter Quote <small className="sales-brand-owner">by HD Precision</small>
         </Link>
-        <nav aria-label="Main navigation"><a href="#how-it-works">How it works</a><a href="#roi">ROI</a><a href="#compare">Compare</a><a href="#pricing">Pricing</a></nav>
+        <nav aria-label="Main navigation"><a href="#examples">Examples</a><a href="#how-it-works">How it works</a><a href="#roi">ROI</a><a href="#compare">Compare</a><a href="#pricing">Pricing</a></nav>
         <div className="sales-nav__actions"><Link href="/sign-in">Sign in</Link><Link href="/sign-up" className="sales-button sales-button--small">See It On My Website <ArrowRight size={14} /></Link></div>
       </header>
 
@@ -133,6 +133,45 @@ export default function ForContractorsPage() {
       <section className="growth-switch" id="features" aria-labelledby="outcomes-title">
         <div className="growth-heading"><span>MORE VALUE FROM THE TRAFFIC YOU ALREADY HAVE</span><h2 id="outcomes-title">Stop losing ready-to-buy homeowners to “we’ll call you tomorrow.”</h2><p>HD Instant Gutter Quote turns your website into a guided sales experience that educates, qualifies, and moves the homeowner toward an appointment before interest cools.</p></div>
         <div className="growth-advantage-grid">{outcomes.map(([Icon, title, copy, proof]) => <article key={title}><span><Icon size={20} /></span><small>{proof}</small><h3>{title}</h3><p>{copy}</p></article>)}</div>
+      </section>
+
+      <section className="growth-examples" id="examples" aria-labelledby="examples-title">
+        <div className="growth-heading growth-heading--light"><span>TWO WAYS TO PUT IT TO WORK</span><h2 id="examples-title">See exactly how it can look for a gutter company.</h2><p>Use the quote experience inside the website you already have, launch it as a focused standalone page, or run both together under one brand.</p></div>
+        <div className="growth-example-grid">
+          <article className="growth-example-card">
+            <header><span><Code2 size={16} /> WEBSITE WIDGET</span><small>Lives inside your current site</small></header>
+            <div className="growth-example-stage growth-example-stage--widget" aria-hidden="true">
+              <div className="example-customer-site">
+                <div className="example-site-nav"><b><span>S</span> Summit Gutter Co.</b><div><i>Services</i><i>Our Work</i><i>Reviews</i><em>Get a Quote</em></div></div>
+                <div className="example-site-hero">
+                  <div><small>JACKSONVILLE&apos;S GUTTER SPECIALISTS</small><h3>Protect your home from Florida storms.</h3><p>Seamless gutters installed by a local crew that stands behind the work.</p><span>View Our Work <ArrowRight size={9} /></span></div>
+                  <div className="example-house-scene"><i /><i /><span /></div>
+                </div>
+                <div className="example-widget-shell">
+                  <div className="example-widget-copy"><small>FREE INSTANT ESTIMATE</small><h4>See what new gutters could cost.</h4><p>Start with the property. No phone call required.</p></div>
+                  <div className="example-widget-action"><div><MapPin size={12} /><span>Enter your home address</span></div><b>Start My Estimate <ArrowRight size={10} /></b><small><ShieldCheck size={9} /> Private and secure</small></div>
+                </div>
+              </div>
+            </div>
+            <div className="growth-example-card__copy"><b>Keep the website you already own.</b><p>Place the quote experience inside a high-intent page so homeowners can start without leaving your brand or opening another tab.</p></div>
+          </article>
+
+          <article className="growth-example-card">
+            <header><span><Globe2 size={16} /> STANDALONE BRANDED PAGE</span><small>A focused campaign destination</small></header>
+            <div className="growth-example-stage growth-example-stage--standalone" aria-hidden="true">
+              <div className="example-standalone-browser">
+                <div className="example-browser-bar"><i /><i /><i /><span>estimate.summitgutterco.com</span><em>SECURE</em></div>
+                <div className="example-branded-nav"><b><span>S</span> Summit Gutter Co.</b><small><ShieldCheck size={9} /> Licensed · Insured · Local</small></div>
+                <div className="example-standalone-main">
+                  <div className="example-standalone-copy"><small>INSTANT GUTTER ESTIMATE</small><h3>Better gutters start with your address.</h3><p>See a planning price range, compare systems, and explore colors on your home.</p><div><MapPin size={12} /><span>123 Main Street, Jacksonville, FL</span><CheckCircle2 size={11} /></div><b>See My Options <ArrowRight size={10} /></b></div>
+                  <div className="example-standalone-result"><div className="example-result-home"><i /><span /></div><small>PLANNING ESTIMATE</small><strong>$2,840–$3,420</strong><p>184 linear ft · field verification required</p><em><CalendarCheck size={10} /> Request an appointment</em></div>
+                </div>
+              </div>
+            </div>
+            <div className="growth-example-card__copy"><b>Send ad traffic to one job-focused experience.</b><p>Use a branded domain and distraction-free page for Google Ads, social campaigns, QR codes, email, and direct homeowner sharing.</p></div>
+          </article>
+        </div>
+        <div className="growth-examples-note"><span><BadgeCheck size={18} /></span><p><b>Illustrative contractor examples.</b> Your live version uses your company name, logo, colors, products, pricing, service area, contact details, and domain.</p><Link href="/sign-up">Render My Company Version <ArrowRight size={14} /></Link></div>
       </section>
 
       <section className="growth-journey" id="how-it-works" aria-labelledby="journey-title">
@@ -238,7 +277,7 @@ export default function ForContractorsPage() {
       </section>
 
       <section className="growth-final-cta"><div><span>YOUR NEXT WEBSITE VISITOR COULD BE YOUR NEXT SOLD JOB</span><h2>Let your website start the sales conversation.</h2><p>Build the private version with your brand, products, and pricing. See exactly what homeowners will experience before you decide to launch.</p></div><Link href="/sign-up" className="sales-button">Start Closing More Jobs <ArrowRight size={16} /></Link></section>
-      <footer className="sales-footer growth-footer"><div><Link href="/for-contractors" className="sales-brand"><span><Droplets size={19} /></span><b>HD Instant</b> Gutter Quote</Link><p>Turn website visitors into price-ready gutter opportunities.</p></div><div><b>Product</b><a href="#how-it-works">How it works</a><a href="#compare">Compare</a><a href="#pricing">Pricing</a></div><div><b>Account</b><Link href="/sign-up">Build my demo</Link><Link href="/sign-in">Sign in</Link></div><div><b>Legal & support</b><Link href="/terms">Terms</Link><Link href="/privacy">Privacy</Link><Link href="/domain-terms">Managed domains</Link><a href="tel:+19044789272">(904) 478-9272</a></div><small>© 2026 HD Precision. Online gutter estimates are planning ranges subject to field verification.</small></footer>
+      <footer className="sales-footer growth-footer"><div><Link href="/for-contractors" className="sales-brand"><span><Droplets size={19} /></span><b>HD Instant</b> Gutter Quote</Link><p>Turn website visitors into price-ready gutter opportunities.</p></div><div><b>Product</b><a href="#examples">Examples</a><a href="#how-it-works">How it works</a><a href="#compare">Compare</a><a href="#pricing">Pricing</a></div><div><b>Account</b><Link href="/sign-up">Build my demo</Link><Link href="/sign-in">Sign in</Link></div><div><b>Legal & support</b><Link href="/terms">Terms</Link><Link href="/privacy">Privacy</Link><Link href="/domain-terms">Managed domains</Link><a href="tel:+19044789272">(904) 478-9272</a></div><small>© 2026 HD Precision. Online gutter estimates are planning ranges subject to field verification.</small></footer>
     </main>
   )
 }
